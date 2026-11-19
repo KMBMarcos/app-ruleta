@@ -41,11 +41,10 @@ const slotAt = deg => Math.floor((((-deg % 360) + 360) % 360 + STEP / 2) / STEP)
 for (let i = 0; i < N; i++) for (const j of [-14, 0, 14]) console.assert(slotAt(-i * STEP + j - 720) === i, "slotAt", i, j);
 
 let angle = 0, spinning = false;
-const btn = document.getElementById("spin"), prizeEl = document.getElementById("prize"), noteEl = document.getElementById("note");
+const btn = document.getElementById("spin");
 function spin() {
   if (spinning) return;
   spinning = btn.disabled = true;
-  prizeEl.textContent = "Girando…"; prizeEl.className = "idle"; noteEl.textContent = "";
   const i = crypto.getRandomValues(new Uint32Array(1))[0] % N;
   const jitter = (Math.random() - 0.5) * (STEP - 8); // se mantiene dentro de la casilla
   angle = Math.ceil(angle / 360) * 360 + (5 + Math.floor(Math.random() * 3)) * 360 - i * STEP + jitter;
@@ -55,7 +54,6 @@ spinner.addEventListener("transitionend", e => {
   if (e.propertyName !== "transform" || !spinning) return;
   const prize = PRIZES[slotAt(angle)];
   const note = /US\$|AHG/.test(prize) ? "¡Felicidades!" : "Gracias por participar.";
-  prizeEl.textContent = prize; prizeEl.className = ""; noteEl.textContent = note;
   btn.textContent = "Girar de nuevo →";
   spinning = btn.disabled = false;
   document.getElementById("m-prize").textContent = prize;
