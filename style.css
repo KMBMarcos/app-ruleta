@@ -48,9 +48,22 @@ h1 .dot { color: var(--orange); }
 .info .intro { margin-top: 12px; font-size: 18px; max-width: 28ch; }
 #spin { display: block; margin-top: 32px; font-size: clamp(40px, 5vw, 72px); font-weight: 500; letter-spacing: -0.05em; line-height: 1; }
 .result { margin-top: 56px; border-top: 1px solid var(--line); padding-top: 20px; }
-#prize { margin-top: 12px; font-size: clamp(36px, 4.5vw, 64px); font-weight: 500; letter-spacing: -0.04em; line-height: 1; }
+#prize, #m-prize { margin-top: 12px; font-size: clamp(36px, 4.5vw, 64px); font-weight: 500; letter-spacing: -0.04em; line-height: 1; }
 #prize.idle { color: var(--muted); }
-#note { margin-top: 12px; font-size: 18px; }
+#note, #m-note { margin-top: 12px; font-size: 18px; }
+#prize:not(.idle), #m-prize { text-shadow: 0 6px 24px rgba(17, 17, 16, 0.28); }
+
+dialog {
+  background: var(--bone); color: var(--ink); border: 1px solid var(--ink); border-radius: 0;
+  padding: var(--pad); width: min(90vw, 440px); text-align: left;
+  opacity: 0; transition: opacity 300ms ease, display 300ms allow-discrete, overlay 300ms allow-discrete;
+}
+dialog[open] { opacity: 1; }
+@starting-style { dialog[open] { opacity: 0; } }
+dialog::backdrop { background: rgba(17, 17, 16, 0.55); }
+dialog img { display: block; width: 120px; height: 120px; margin-top: 24px; }
+dialog .link { display: block; width: fit-content; margin-top: 24px; font-weight: 500; }
+dialog .link:focus-visible { outline: none; background-size: 100% 2px; }
 
 .wheel { grid-column: 6 / span 7; width: 100%; max-width: 80vh; justify-self: end; }
 .wheel svg { display: block; width: 100%; height: auto; cursor: pointer; }
@@ -71,6 +84,6 @@ footer .follow img { display: block; width: 96px; height: 96px; margin-top: 12px
 @media (prefers-reduced-motion: reduce) {
   h1 .line > span { animation: none; transform: none; }
   .stage { animation: none; opacity: 1; }
-  .link { transition: none; }
+  .link, dialog { transition: none; }
   #spinner { transition-duration: 0.5s; }
 }
