@@ -28,5 +28,7 @@ The look follows `DESING.md` (a spec written for an "Atelier North" landing page
 
 ## Assets (repo root)
 
+- `aspecto.jpeg` and `logo-marron.jpeg` are untracked reference images (not used by the page); `DESING.md` is also still untracked. Don't reference them from the site without committing them first.
+
 - `logo.png`: white AHG logo on a transparent background. It is shown in Ink on the Bone page via `filter: brightness(0)`.
 - `qr.png`: gold-on-white QR code ("Síguenos"), shown in the footer. It encodes `https://www.instagram.com/arroyohondogardens?jplx=M2oxejczb3lnNnQz` (regenerated with `segno`, same gold and double frame).
