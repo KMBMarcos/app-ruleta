@@ -8,7 +8,7 @@ Static site, no dependencies, no build step, no test runner: `index.html` (marku
 
 How it works:
 - The `PRIZES` array at the top of `app.js` is the only place the prizes are defined. The wheel's slices and labels are generated from it as SVG at load, so changing it changes the wheel.
-- A spin picks a uniform random slot with `crypto.getRandomValues`, then rotates the `#spinner` group with a CSS transition to put that slot under the fixed top pointer. `slotAt(angle)` maps the final angle back to the slot shown in the inline "Resultado" block (`aria-live`); a `console.assert` loop at load checks that mapping.
+- A spin picks a uniform random slot with `crypto.getRandomValues`, then rotates the `#spinner` group with a CSS transition to put that slot under the fixed top pointer. `slotAt(angle)` maps the final angle back to the slot shown in the inline "Resultado" block (`aria-live`) and in a native `<dialog id="modal">` (prize, message, QR) opened with `showModal()`; a `console.assert` loop at load checks that mapping (failures only show in the browser devtools console, so open it after editing the wheel geometry).
 - The rim, hub and pointer are static and don't rotate. The spin control is the "Girar" link-style button; clicking the wheel also spins.
 - Label wrapping (14 characters) and font sizes were tuned by eye against the 10 current prizes; recheck the render if you change labels.
 

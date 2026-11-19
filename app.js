@@ -54,10 +54,16 @@ function spin() {
 spinner.addEventListener("transitionend", e => {
   if (e.propertyName !== "transform" || !spinning) return;
   const prize = PRIZES[slotAt(angle)];
-  prizeEl.textContent = prize; prizeEl.className = "";
-  noteEl.textContent = /US\$|AHG/.test(prize) ? "¡Felicidades!" : "Gracias por participar.";
+  const note = /US\$|AHG/.test(prize) ? "¡Felicidades!" : "Gracias por participar.";
+  prizeEl.textContent = prize; prizeEl.className = ""; noteEl.textContent = note;
   btn.textContent = "Girar de nuevo →";
   spinning = btn.disabled = false;
+  document.getElementById("m-prize").textContent = prize;
+  document.getElementById("m-note").textContent = note;
+  modal.showModal();
 });
+const modal = document.getElementById("modal");
+document.getElementById("m-close").addEventListener("click", () => modal.close());
+modal.addEventListener("click", e => { if (e.target === modal) modal.close(); }); // clic en el fondo
 btn.addEventListener("click", spin);
 document.getElementById("svg").addEventListener("click", spin);
